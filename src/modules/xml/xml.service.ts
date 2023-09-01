@@ -12,7 +12,7 @@ export class XmlService {
 		const worksheetCount = workbook.worksheets.length;
 		const result = [];
 		for (let i = 1; i <= worksheetCount; i++) {
-			const worksheet = workbook.getWorksheet(i); // get work specific worksheet
+			const worksheet = workbook.getWorksheet(i); // get specific worksheet
 			const firstRow = worksheet.views && worksheet.views[0] && worksheet.views[0].state === 'frozen' ? worksheet.views[0].ySplit + 1 : 1; // get only unfreeze rows
 			const rows = [];
 			for (let rowNumber = firstRow; rowNumber <= worksheet.rowCount; rowNumber++) {
@@ -24,14 +24,14 @@ export class XmlService {
 						rowData.push(cell.value);
 					}
 				});
-				// map only not null rows
+				// map only not null data
 				if (rowData.length > 0){
 					rows.push(rowData);
 				}
 			}
 			// map data for each sheet
 			const sheetData = {
-				sheet: i,
+				sheetName: worksheet.name,
 				data: rows
 			}
 			result.push(sheetData); // push data by sheet

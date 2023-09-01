@@ -37,21 +37,21 @@ export class AppController {
   @Patch('stored-procedure')
   @UseFilters(new HttpExceptionFilter())
   async testCreateStoredProcedureBody() {
-    return await this.appService.testCreateStoredProcedureBody().catch(err => {
-      throw new HttpException({
-        message: err.message
-      }, HttpStatus.BAD_REQUEST);
-    })
-    // try {
-    //   return await this.appService.testCreateStoredProcedureBody();
-    // } catch (error) {
+    // return await this.appService.testCreateStoredProcedureBody().catch(err => {
     //   throw new HttpException({
-    //     status: HttpStatus.FORBIDDEN,
-    //     error: error,
-    //   }, HttpStatus.FORBIDDEN, {
-    //     cause: error
-    //   });
-    // }
+    //     message: err.message
+    //   }, HttpStatus.BAD_REQUEST);
+    // })
+    try {
+      return await this.appService.testCreateStoredProcedureBody();
+    } catch (error) {
+      throw new HttpException({
+        status: HttpStatus.FORBIDDEN,
+        error: error,
+      }, HttpStatus.FORBIDDEN, {
+        cause: error
+      });
+    }
   }
 
   @Get()

@@ -19,7 +19,8 @@ export class MyLoggerService implements LoggerService{
 			),
 			transports: [
 				new winston.transports.Console(),
-				// new winston.transports.File({ filename: 'logs.log'}),
+				new winston.transports.File({ filename: 'errors.log', level: 'error'}),
+				new winston.transports.File({ filename: 'debug.log', level: 'debug'}),
 				new DailyRotateFile({
 					filename: 'logs-%DATE%.log',
 					datePattern: 'YYYY-MM-DD',

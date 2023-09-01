@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
@@ -17,6 +18,6 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', '/views'));
   app.setViewEngine('hbs');
 
-  await app.listen(3000);
+  await app.listen(parseInt(process.env.PORT) || 3000);
 }
 bootstrap();
